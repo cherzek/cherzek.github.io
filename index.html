@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Educational App Portfolio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Simple body background for contrast */
+        body {
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-900">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <h1 class="text-4xl font-bold text-indigo-700">My Educational Apps</h1>
+            <p class="mt-2 text-xl text-gray-600">A collection of projects I've built to help others learn.</p>
+        </div>
+    </header>
+
+    <!-- Main Content - App Grid -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <h2 class="text-3xl font-semibold mb-8">My Projects</h2>
+
+        <!-- Responsive Grid for App Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- App Card 1 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                <!-- App Screenshot Placeholder -->
+                <img src="https://placehold.co/600x400/6366f1/white?text=My+First+App" alt="My First App Screenshot" class="w-full h-48 object-cover">
+                
+                <!-- Card Content -->
+                <div class="p-6 flex-grow">
+                    <h3 class="text-2xl font-semibold mb-2">My First App</h3>
+                    <p class="text-gray-700 mb-4">
+                        A brief, engaging description of what this app does. For example, "A fun quiz game to test your multiplication skills!"
+                    </p>
+                </div>
+
+                <!-- Card Footer with Link -->
+                <div class="p-6 bg-gray-50 border-t border-gray-200">
+                    <a href="apps/app1/index.html" class="inline-block bg-indigo-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300 hover:bg-indigo-700">
+                        Launch App
+                    </a>
+                </div>
+            </div>
+
+            <!-- App Card 2 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                <!-- App Screenshot Placeholder -->
+                <img src="https://placehold.co/600x400/10b981/white?text=Another+Cool+App" alt="Another Cool App Screenshot" class="w-full h-48 object-cover">
+                
+                <!-- Card Content -->
+                <div class="p-6 flex-grow">
+                    <h3 class="text-2xl font-semibold mb-2">Another Cool App</h3>
+                    <p class="text-gray-700 mb-4">
+                        This app helps users understand complex topics like the solar system or cellular biology through interactive diagrams.
+                    </p>
+                </div>
+                
+                <!-- Card Footer with Link -->
+                <div class="p-6 bg-gray-50 border-t border-gray-200">
+                    <a href="#" class="inline-block bg-teal-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300 hover:bg-teal-700">
+                        Launch App
+                    </a>
+                </div>
+            </div>
+
+            <!-- App Card 3 - Placeholder -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                <!-- App Screenshot Placeholder -->
+                <img src="https://placehold.co/600x400/f59e0b/white?text=Future+Project" alt="Future Project Screenshot" class="w-full h-48 object-cover">
+                
+                <!-- Card Content -->
+                <div class="p-6 flex-grow">
+                    <h3 class="text-2xl font-semibold mb-2">Future Project</h3>
+                    <p class="text-gray-700 mb-4">
+                        I'm currently working on a new app! This card will link to it as soon as it's ready.
+                    </p>
+                </div>
+
+                <!-- Card Footer with Link (Disabled) -->
+                <div class="p-6 bg-gray-50 border-t border-gray-200">
+                    <span class="inline-block bg-gray-400 text-white font-semibold py-2 px-5 rounded-lg cursor-not-allowed">
+                        Coming Soon
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Add more cards here as you build more apps! -->
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 mt-12 border-t border-gray-200 bg-white">
+        <p class="text-gray-600">&copy; 2025 Your Name Here. All rights reserved.</p>
+        <p class="text-gray-500 mt-1">Made with ❤️ and GitHub Pages.</p>
+    </footer>
+
+</body>
+</html>
