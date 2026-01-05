@@ -13,6 +13,16 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                     },
+                    // Added animations for the IEP Card
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        }
+                    }
                 },
             },
         }
@@ -24,97 +34,329 @@
         }
     </style>
 </head>
-<body class="font-sans text-gray-900">
+<body class="font-sans text-gray-900 flex flex-col min-h-screen">
 
     <!-- Header Section -->
-    <header class="bg-white shadow-md">
+    <header class="bg-white shadow-md relative z-20">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <h1 class="text-4xl font-bold text-indigo-700">My Educational Apps</h1>
-            <p class="mt-2 text-xl text-gray-600">A collection of tools and resources I've built to help teachers and admin.</p>
+            <p class="mt-2 text-xl text-gray-600">A collection of projects I've built to help others learn.</p>
         </div>
     </header>
 
-    <!-- Main Content - App Grid -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
         
-        <h2 class="text-3xl font-semibold mb-8">My Projects</h2>
+        <!-- Bio Section -->
+        <section class="mb-16 bg-white rounded-xl shadow-md overflow-hidden max-w-3xl mx-auto">
+            <!-- Colored Banner -->
+            <div class="h-32 bg-indigo-600 w-full"></div>
+            
+            <!-- Profile Content -->
+            <div class="px-8 pb-8">
+                <div class="relative flex justify-center">
+                    <!-- Profile Image -->
+                    <img class="h-32 w-32 rounded-full border-4 border-white -mt-16 object-cover bg-white shadow-sm" 
+                         src="https://placehold.co/192x192/4f46e5/white?text=CH" 
+                         alt="Charles Herzek">
+                </div>
+                
+                <div class="text-center mt-4">
+                    <h2 class="text-3xl font-bold text-gray-900">Hi, I'm Charles Herzek</h2>
+                    <p class="text-indigo-600 font-semibold uppercase tracking-wide text-sm mt-1">Educator, Leader & Developer</p>
+                    
+                    <p class="mt-6 text-gray-600 leading-relaxed max-w-xl mx-auto">
+                        I am a Special Education and Computer Science teacher holding both School Building (SBL) and School District Leader (SDL) certifications. Leveraging my background in educational technology and instructional leadership, I specialize in creating digital tools that solve real-world challenges for students, teachers, and administrators. My passion is building and sharing accessible resources that streamline school operations and enhance learning outcomes.
+                    </p>
+
+                    <!-- Social Links -->
+                    <div class="mt-6 flex justify-center space-x-4">
+                        <!-- LinkedIn Link -->
+                        <a href="#" class="flex items-center space-x-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            <span class="font-medium">LinkedIn</span>
+                        </a>
+
+                        <!-- GitHub Link -->
+                        <a href="#" class="flex items-center space-x-2 px-4 py-2 bg-gray-800 hover:bg-gray-900 text-white rounded-lg transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            <span class="font-medium">GitHub</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="text-3xl font-semibold mb-8 border-b pb-4 border-gray-300">My Projects</h2>
 
         <!-- Responsive Grid for App Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            <!-- App Card 1 -->
+            <!-- App Card 1 - TRIAGE -->
             <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-                <!-- App Screenshot Placeholder -->
-                <img src="https://placehold.co/600x400/6366f1/white?text=Triage" alt="My First App Screenshot" class="w-full h-48 object-cover">
+                <!-- App Screenshot -->
+                <img src="https://placehold.co/600x400/6366f1/white?text=Triage" alt="Triage App" class="w-full h-48 object-cover">
                 
                 <!-- Card Content -->
                 <div class="p-6 flex-grow">
-                    <h3 class="text-2xl font-semibold mb-2">Triage</h3>
+                    <h3 class="text-2xl font-semibold mb-2 text-indigo-700">Triage</h3>
                     <p class="text-gray-700 mb-4">
-                        An tool that allows the user to upload a CSV of the RBIR and automatically parse out a list of students failing multiple classes, generating a prioritized intervention list.
+                        An app that allows the user to upload a CSV of the RBIR and automatically parse out a list of students failing multiple classes.
                     </p>
                 </div>
 
-                <!-- Card Footer with Link -->
+                <!-- Card Footer with Link (Updated for Lightbox) -->
                 <div class="p-6 bg-gray-50 border-t border-gray-200">
-                    <a href="https://cherzek.github.io/triage/" target="_blank" class="inline-block bg-indigo-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300 hover:bg-indigo-700">
+                    <a href="https://cherzek.github.io/triage/" onclick="event.preventDefault(); openModal(this.href, 'Triage App')" class="inline-block bg-indigo-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300 hover:bg-indigo-700 w-full text-center">
                         Launch Triage
                     </a>
                 </div>
             </div>
 
-            <!-- App Card 2 -->
+            <!-- App Card 2 - BEACON -->
             <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-                <!-- App Screenshot Placeholder -->
-                <img src="https://placehold.co/600x400/10b981/white?text=Beacon" alt="Another Cool App Screenshot" class="w-full h-48 object-cover">
+                <!-- App Screenshot -->
+                <img src="https://placehold.co/600x400/10b981/white?text=Beacon" alt="Beacon App" class="w-full h-48 object-cover">
                 
                 <!-- Card Content -->
                 <div class="p-6 flex-grow">
-                    <h3 class="text-2xl font-semibold mb-2">Beacon</h3>
+                    <h3 class="text-2xl font-semibold mb-2 text-teal-700">Beacon</h3>
                     <p class="text-gray-700 mb-4">
-                        Building off of my Triage tool, this tool allows the user to quickly generate accountability forms for students to collect signatures to indicate that they attended tutoriong.
+                        This app allows the user to quickly generate accountability forms for students to collect signatures to indicate that they attended tutoring.
                     </p>
                 </div>
                 
-                <!-- Card Footer with Link -->
+                <!-- Card Footer with Link (Updated for Lightbox) -->
                 <div class="p-6 bg-gray-50 border-t border-gray-200">
-                    <a href="https://cherzek.github.io/beacon/" target="_blank" class="inline-block bg-teal-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300 hover:bg-teal-700">
+                    <a href="https://cherzek.github.io/beacon/" onclick="event.preventDefault(); openModal(this.href, 'Beacon App')" class="inline-block bg-teal-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300 hover:bg-teal-700 w-full text-center">
                         Launch Beacon
                     </a>
                 </div>
             </div>
 
-            <!-- App Card 3 - Placeholder -->
+            <!-- App Card 3 - Hive Class Playlist Manager -->
             <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-                <!-- App Screenshot Placeholder -->
-                <img src="https://placehold.co/600x400/f59e0b/white?text=Future+Project" alt="Future Project Screenshot" class="w-full h-48 object-cover">
+                <!-- App Screenshot -->
+                <img src="https://placehold.co/600x400/f59e0b/white?text=Hive+Manager" alt="Hive App" class="w-full h-48 object-cover">
                 
                 <!-- Card Content -->
                 <div class="p-6 flex-grow">
-                    <h3 class="text-2xl font-semibold mb-2">Future Project</h3>
+                    <h3 class="text-2xl font-semibold mb-2 text-yellow-700">Hive Class Playlist Manager</h3>
                     <p class="text-gray-700 mb-4">
-                        I'm currently working on a new app! This card will link to it as soon as it's ready.
+                        Simplify your classroom media management. Create, organize, and share educational playlists to keep your students focused and engaged.
                     </p>
                 </div>
-
-                <!-- Card Footer with Link (Disabled) -->
+                
+                <!-- Card Footer with Link -->
                 <div class="p-6 bg-gray-50 border-t border-gray-200">
-                    <span class="inline-block bg-gray-400 text-white font-semibold py-2 px-5 rounded-lg cursor-not-allowed">
+                    <span class="inline-block bg-gray-400 text-white font-semibold py-2 px-5 rounded-lg w-full text-center cursor-not-allowed">
                         Coming Soon
                     </span>
                 </div>
             </div>
-            
-            <!-- Add more cards here as you build more apps! -->
 
+            <!-- App Card 4 - IEP Helper Suite (Interactive "Top Pills" Style) -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+               <!-- Header/Image area -->
+               <div class="h-40 bg-red-100 flex items-center justify-center">
+                  <img src="https://placehold.co/600x400/dc2626/white?text=IEP+Agents" alt="IEP Tools" class="h-full w-full object-cover opacity-90">
+               </div>
+               
+               <!-- Pill Nav -->
+               <div class="px-4 py-4 border-b border-gray-100">
+                  <div class="flex space-x-1 bg-gray-100 p-1 rounded-lg">
+                     <button onclick="switchPill('ines')" id="btn-ines" class="flex-1 py-2 text-xs font-bold rounded-md bg-white shadow text-red-600 transition-all">Ines</button>
+                     <button onclick="switchPill('ethan')" id="btn-ethan" class="flex-1 py-2 text-xs font-bold rounded-md text-gray-500 hover:text-gray-900 transition-all">Ethan</button>
+                     <button onclick="switchPill('priya')" id="btn-priya" class="flex-1 py-2 text-xs font-bold rounded-md text-gray-500 hover:text-gray-900 transition-all">Priya</button>
+                  </div>
+               </div>
+
+               <!-- Content -->
+               <div class="px-6 py-6 flex-grow flex flex-col">
+                  
+                  <!-- INES CONTENT -->
+                  <div id="pill-content-ines" class="pill-content block animate-fade-in flex-grow">
+                      <h3 class="text-xl font-bold text-gray-800 mb-2">Ines (PLAAFP)</h3>
+                      <p class="text-gray-600 text-sm mb-4">Responsible for writing the Present Levels of Performance and Student Needs Relating to Special Factors.</p>
+                      <ul class="text-xs text-gray-500 list-disc pl-4 mb-4 space-y-1">
+                          <li>Drafts Present Levels</li>
+                          <li>Identifies Special Factors</li>
+                      </ul>
+                      <div class="mt-auto pt-4">
+                        <a href="https://gemini.google.com/gem/1gQRifcThB64XMm7p7cslsOb8408iXpS1?usp=sharing" target="_blank" class="block w-full py-2 bg-red-600 text-white text-center rounded-lg font-bold hover:bg-red-700 transition-colors">Chat with Ines</a>
+                      </div>
+                  </div>
+
+                  <!-- ETHAN CONTENT -->
+                  <div id="pill-content-ethan" class="pill-content hidden animate-fade-in flex-grow">
+                      <h3 class="text-xl font-bold text-gray-800 mb-2">Ethan (Goals)</h3>
+                      <p class="text-gray-600 text-sm mb-4">Responsible for writing the Postsecondary Goals and Measurable Annual Goals based on data.</p>
+                      <div class="bg-gray-50 p-3 rounded mb-4 border border-gray-100">
+                          <p class="text-xs text-gray-500 italic">"I ensure goals are measurable and aligned to standards."</p>
+                      </div>
+                      <div class="mt-auto pt-4">
+                        <a href="https://gemini.google.com/gem/15KzitGz3DURE31pnmMTYJ5ZnZH1lDNnh?usp=sharing" target="_blank" class="block w-full py-2 bg-red-600 text-white text-center rounded-lg font-bold hover:bg-red-700 transition-colors">Chat with Ethan</a>
+                      </div>
+                  </div>
+
+                  <!-- PRIYA CONTENT -->
+                  <div id="pill-content-priya" class="pill-content hidden animate-fade-in flex-grow">
+                      <h3 class="text-xl font-bold text-gray-800 mb-2">Priya (Reviewer)</h3>
+                      <p class="text-gray-600 text-sm mb-4">Completes other sections, reviews the work of Ines and Ethan, and generates the completed IEP.</p>
+                      <p class="text-xs bg-yellow-50 text-yellow-800 p-2 rounded mb-4 border border-yellow-100">
+                          <strong>Role:</strong> Lead Compliance Reviewer
+                      </p>
+                      <div class="mt-auto pt-4">
+                        <a href="https://gemini.google.com/gem/1kmSX-ngMXdJcFqLV9nNFGXszNwgbIUIn?usp=sharing" target="_blank" class="block w-full py-2 bg-red-600 text-white text-center rounded-lg font-bold hover:bg-red-700 transition-colors">Chat with Priya</a>
+                      </div>
+                  </div>
+
+               </div>
+            </div>
+
+            <!-- App Card 5 - Anna (Data Specialist) -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                <!-- App Screenshot -->
+                <img src="https://placehold.co/600x400/9333ea/white?text=Data+Agent" alt="Anna Agent" class="w-full h-48 object-cover">
+                
+                <!-- Card Content -->
+                <div class="p-6 flex-grow">
+                    <h3 class="text-2xl font-semibold mb-2 text-purple-700">Anna (Data Specialist)</h3>
+                    <p class="text-gray-700 mb-4">
+                        A school data specialist agent. Anna analyzes Regents, MAP Growth, and enrollment data to spot trends and recommend MTSS protocols.
+                    </p>
+                </div>
+
+                <!-- Card Footer with Link -->
+                <div class="p-6 bg-gray-50 border-t border-gray-200">
+                    <a href="https://gemini.google.com/gem/1Qb0yVrlYxkBEGM13ri9U53kPK0-s8J6u?usp=sharing" target="_blank" class="inline-block bg-purple-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300 hover:bg-purple-700 w-full text-center">
+                        Chat with Anna
+                    </a>
+                </div>
+            </div>
+            
         </div>
+
+        <!-- NEW: Contact Form Section (Google Forms Integration) -->
+        <section class="mt-20 max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Get In Touch</h2>
+            
+            <script type="text/javascript">var submitted=false;</script>
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {alert('Thank you! Your message has been sent successfully.'); document.getElementById('contact-form').reset();}"></iframe>
+            
+            <!-- GOOGLE FORM INTEGRATED -->
+            <form id="contact-form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdENF-moIYuPAUFQEmamSHLwi3arZ1jp0PqPRPpgVX5-WxJOA/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;" class="space-y-6">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <input type="text" id="name" name="entry.1808073583" required class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 bg-gray-50" placeholder="Your Name">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" name="entry.838061836" required class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 bg-gray-50" placeholder="you@example.com">
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                    <textarea id="message" name="entry.15001179" rows="4" required class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 bg-gray-50" placeholder="How can I help you?"></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-base font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform transform hover:-translate-y-1">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+        </section>
+
     </main>
 
     <!-- Footer -->
-    <footer class="text-center py-8 mt-12 border-t border-gray-200 bg-white">
-        <p class="text-gray-600">&copy; 2025 C. Herzek. All rights reserved.</p>
+    <footer class="text-center py-8 mt-auto border-t border-gray-200 bg-white">
+        <p class="text-gray-600">&copy; 2025 Charles B. Herzek. All rights reserved.</p>
         <p class="text-gray-500 mt-1">Made with ❤️ and GitHub Pages.</p>
     </footer>
+
+    <!-- LIGHTBOX / MODAL STRUCTURE -->
+    <div id="app-modal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Background backdrop -->
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity backdrop-blur-sm" onclick="closeModal()"></div>
+
+        <!-- Modal Panel -->
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="relative bg-white rounded-xl shadow-2xl w-full max-w-6xl h-[85vh] flex flex-col overflow-hidden">
+                
+                <!-- Modal Header -->
+                <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 bg-gray-50">
+                    <h3 class="text-xl font-bold text-gray-800" id="modal-title">App Preview</h3>
+                    <div class="flex items-center space-x-2">
+                        <a id="modal-external-link" href="#" target="_blank" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium mr-4">
+                            Open in New Tab &nearr;
+                        </a>
+                        <button type="button" onclick="closeModal()" class="text-gray-400 hover:text-gray-600 focus:outline-none transition-colors">
+                            <span class="sr-only">Close</span>
+                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Modal Body (Iframe) -->
+                <div class="flex-grow bg-gray-100 relative">
+                    <iframe id="modal-iframe" src="" class="absolute inset-0 w-full h-full border-0" title="App Content"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FOR MODAL & IEP CARD -->
+    <script>
+        // --- MODAL LOGIC ---
+        const modal = document.getElementById('app-modal');
+        const modalIframe = document.getElementById('modal-iframe');
+        const modalTitle = document.getElementById('modal-title');
+        const modalExternalLink = document.getElementById('modal-external-link');
+
+        function openModal(url, title) {
+            modalIframe.src = url;
+            modalTitle.textContent = title || 'App Preview';
+            modalExternalLink.href = url;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            modalIframe.src = '';
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        });
+
+        // --- IEP CARD PILL SWITCHER LOGIC ---
+        function switchPill(pillName) {
+            // Content Toggle
+            document.querySelectorAll('.pill-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('pill-content-' + pillName).classList.remove('hidden');
+            
+            // Button Style Toggle
+            const buttons = ['ines', 'ethan', 'priya'];
+            buttons.forEach(name => {
+                const btn = document.getElementById('btn-' + name);
+                if(name === pillName) {
+                    // Active State
+                    btn.classList.remove('text-gray-500', 'hover:text-gray-900');
+                    btn.classList.add('bg-white', 'shadow', 'text-red-600');
+                } else {
+                    // Inactive State
+                    btn.classList.add('text-gray-500', 'hover:text-gray-900');
+                    btn.classList.remove('bg-white', 'shadow', 'text-red-600');
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
