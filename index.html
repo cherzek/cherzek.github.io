@@ -1,11 +1,19 @@
+<!-- 
+  Copyright (c) 2026 Charles B. Herzek. All Rights Reserved.
+  Educational Portfolio: Digital Tools for Student Intervention, Compliance, and Engagement.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Educational App Portfolio</title>
-    <!-- Load Tailwind CSS -->
+    <title>Portfolio Experiment | Floating Menu</title>
+    
+    <!-- Custom SVG Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%234f46e5'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='system-ui, -apple-system, sans-serif' font-weight='bold' font-size='260'%3ECH%3C/text%3E%3C/svg%3E">
+
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -13,7 +21,6 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                     },
-                    // Added animations for the IEP Card
                     animation: {
                         'fade-in': 'fadeIn 0.3s ease-in-out',
                     },
@@ -28,58 +35,97 @@
         }
     </script>
     <style>
-        /* Simple body background for contrast */
-        body {
-            background-color: #f3f4f6;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { background-color: #f3f4f6; scroll-behavior: smooth; }
+        
+        /* Floating Glassmorphism Nav */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Modal Transitions */
+        .modal-overlay {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-content {
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        /* Lift & Shadow Hover Pattern */
+        .card-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
     </style>
 </head>
 <body class="font-sans text-gray-900 flex flex-col min-h-screen">
 
-    <!-- Header Section -->
-    <header class="bg-white shadow-md relative z-20">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <h1 class="text-4xl font-bold text-indigo-700">My Educational Apps</h1>
-            <p class="mt-2 text-xl text-gray-600">A collection of projects I've built to help others learn.</p>
+    <!-- Top Anchor -->
+    <div id="top"></div>
+
+    <!-- FLOATING MENUBAR -->
+    <nav class="sticky top-4 z-50 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto glass-nav rounded-2xl shadow-xl shadow-indigo-100/50 px-6 py-3 flex items-center justify-between">
+            <!-- Brand Link (Goes to top) -->
+            <a href="#top" class="flex items-center gap-3 group transition-all duration-300">
+                <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-sm group-hover:scale-110 transition-transform">CH</div>
+                <div class="hidden md:block">
+                    <span class="font-bold text-gray-800 tracking-tight group-hover:text-indigo-600 transition-colors">Educational Portfolio</span>
+                </div>
+            </a>
+            
+            <div class="flex items-center space-x-1 sm:space-x-2 lg:space-x-4 text-[11px] sm:text-sm font-semibold text-gray-500">
+                <a href="#intervention" class="hover:text-indigo-600 hover:bg-white/50 px-2 lg:px-3 py-2 rounded-xl transition">Intervention</a>
+                <a href="#iep" class="hover:text-indigo-600 hover:bg-white/50 px-2 lg:px-3 py-2 rounded-xl transition">IEP Agents</a>
+                <a href="#engagement" class="hover:text-indigo-600 hover:bg-white/50 px-2 lg:px-3 py-2 rounded-xl transition">Engagement</a>
+                <a href="#design" class="hover:text-indigo-600 hover:bg-white/50 px-2 lg:px-3 py-2 rounded-xl transition">Design</a>
+            </div>
+
+            <div>
+                <a href="#contact" class="bg-indigo-600 text-white text-[10px] sm:text-xs font-bold px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition inline-block">Contact</a>
+            </div>
         </div>
-    </header>
+    </nav>
 
     <!-- Main Content -->
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
         
         <!-- Bio Section -->
-        <section class="mb-16 bg-white rounded-xl shadow-md overflow-hidden max-w-3xl mx-auto">
-            <!-- Colored Banner -->
+        <section class="mb-24 mt-8 bg-white rounded-3xl shadow-md overflow-hidden max-w-3xl mx-auto card-lift border border-white">
             <div class="h-32 bg-indigo-600 w-full"></div>
-            
-            <!-- Profile Content -->
             <div class="px-8 pb-8">
                 <div class="relative flex justify-center">
-                    <!-- Profile Image -->
                     <img class="h-32 w-32 rounded-full border-4 border-white -mt-16 object-cover bg-white shadow-sm" 
                          src="https://placehold.co/192x192/4f46e5/white?text=CH" 
                          alt="Charles Herzek">
                 </div>
-                
                 <div class="text-center mt-4">
                     <h2 class="text-3xl font-bold text-gray-900">Hi, I'm Charles Herzek</h2>
                     <p class="text-indigo-600 font-semibold uppercase tracking-wide text-sm mt-1">Educator, Leader & Developer</p>
-                    
                     <p class="mt-6 text-gray-600 leading-relaxed max-w-xl mx-auto">
                         I am a Special Education and Computer Science teacher holding both School Building (SBL) and School District Leader (SDL) certifications. Leveraging my background in educational technology and instructional leadership, I specialize in creating digital tools that solve real-world challenges for students, teachers, and administrators. My passion is building and sharing accessible resources that streamline school operations and enhance learning outcomes.
                     </p>
-
-                    <!-- Social Links -->
                     <div class="mt-6 flex justify-center space-x-4">
-                        <!-- LinkedIn Link -->
                         <a href="https://www.linkedin.com/in/charles-herzek-1b2645399/" target="_blank" class="flex items-center space-x-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg transition-colors">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
                             <span class="font-medium">LinkedIn</span>
                         </a>
-
-                        <!-- GitHub Link -->
                         <a href="https://github.com/cherzek" target="_blank" class="flex items-center space-x-2 px-4 py-2 bg-gray-800 hover:bg-gray-900 text-white rounded-lg transition-colors">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            <i data-lucide="github" class="w-5 h-5"></i>
                             <span class="font-medium">GitHub</span>
                         </a>
                     </div>
@@ -87,276 +133,368 @@
             </div>
         </section>
 
-        <h2 class="text-3xl font-semibold mb-8 border-b pb-4 border-gray-300">My Projects</h2>
-
-        <!-- Responsive Grid for App Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <!-- App Card 1 - TRIAGE -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-                <!-- App Screenshot -->
-                <img src="https://placehold.co/600x400/6366f1/white?text=Triage" alt="Triage App" class="w-full h-48 object-cover">
-                
-                <!-- Card Content -->
-                <div class="p-6 flex-grow">
-                    <h3 class="text-2xl font-semibold mb-2 text-indigo-700">Triage</h3>
-                    <p class="text-gray-700 mb-4">
-                        An app that allows the user to upload a CSV of the RBIR and automatically parse out a list of students failing multiple classes.
-                    </p>
+        <!-- CATEGORY: Data and Intervention Tools -->
+        <section id="intervention" class="mb-16 scroll-mt-24">
+            <h2 class="text-2xl font-bold mb-8 flex items-center gap-3 text-gray-800 border-b pb-4">
+                <i data-lucide="heart-handshake" class="text-indigo-600"></i>
+                Data and Intervention Tools
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Triage (Emerald 600) -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col card-lift">
+                    <img src="https://placehold.co/600x400/059669/white?text=Triage" alt="Triage App" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-2xl font-semibold mb-2 text-emerald-700">Triage</h3>
+                        <p class="text-gray-700 mb-4 text-sm leading-relaxed">Identify students failing multiple classes for rapid intervention planning via RBIR CSV data.</p>
+                    </div>
+                    <div class="p-6 bg-gray-50 border-t border-gray-100">
+                        <a href="https://cherzek.github.io/triage/" onclick="event.preventDefault(); openAppModal(this.href, 'Triage App')" class="block bg-emerald-600 text-white font-bold py-3 px-5 rounded-xl text-center hover:bg-emerald-700 transition shadow-md shadow-emerald-100">Launch Triage</a>
+                    </div>
                 </div>
-
-                <!-- Card Footer with Link (Updated for Lightbox) -->
-                <div class="p-6 bg-gray-50 border-t border-gray-200">
-                    <a href="https://cherzek.github.io/triage/" onclick="event.preventDefault(); openModal(this.href, 'Triage App')" class="inline-block bg-indigo-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300 hover:bg-indigo-700 w-full text-center">
-                        Launch Triage
-                    </a>
+                <!-- Beacon (Violet 600) -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col card-lift">
+                    <img src="https://placehold.co/600x400/7c3aed/white?text=Beacon" alt="Beacon App" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-2xl font-semibold mb-2 text-violet-700">Beacon</h3>
+                        <p class="text-gray-700 mb-4 text-sm leading-relaxed">Generate accountability forms and signature logs for student tutoring attendance verification.</p>
+                    </div>
+                    <div class="p-6 bg-gray-50 border-t border-gray-100">
+                        <a href="https://cherzek.github.io/beacon/" onclick="event.preventDefault(); openAppModal(this.href, 'Beacon App')" class="block bg-violet-600 text-white font-bold py-3 px-5 rounded-xl text-center hover:bg-violet-700 transition shadow-md shadow-violet-100">Launch Beacon</a>
+                    </div>
                 </div>
-            </div>
-
-            <!-- App Card 2 - BEACON -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-                <!-- App Screenshot -->
-                <img src="https://placehold.co/600x400/10b981/white?text=Beacon" alt="Beacon App" class="w-full h-48 object-cover">
-                
-                <!-- Card Content -->
-                <div class="p-6 flex-grow">
-                    <h3 class="text-2xl font-semibold mb-2 text-teal-700">Beacon</h3>
-                    <p class="text-gray-700 mb-4">
-                        This app allows the user to quickly generate accountability forms for students to collect signatures to indicate that they attended tutoring.
-                    </p>
-                </div>
-                
-                <!-- Card Footer with Link (Updated for Lightbox) -->
-                <div class="p-6 bg-gray-50 border-t border-gray-200">
-                    <a href="https://cherzek.github.io/beacon/" onclick="event.preventDefault(); openModal(this.href, 'Beacon App')" class="inline-block bg-teal-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300 hover:bg-teal-700 w-full text-center">
-                        Launch Beacon
-                    </a>
+                <!-- Anna (Pink 600) -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col card-lift">
+                    <img src="https://placehold.co/600x400/db2777/white?text=Anna" alt="Anna Agent" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow text-left">
+                        <div class="mb-4">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-1">Anna</h3>
+                            <p class="text-pink-600 font-bold uppercase text-[10px] tracking-widest">MTSS Consultant</p>
+                        </div>
+                        <p class="text-gray-700 mb-8 text-sm leading-relaxed">Analyzing Regents and MAP Growth data to spot trends and recommend MTSS building-wide protocols.</p>
+                    </div>
+                    <div class="p-6 bg-gray-50 border-t border-gray-100">
+                        <button onclick="openPrivacyModal('Anna', 'https://gemini.google.com/gem/1WSfVeAAiW7zzgQ3pKno_gek4mJxNMsOy?usp=sharing')" class="block w-full bg-pink-600 text-white font-bold py-3 px-5 rounded-xl text-center hover:bg-pink-700 transition shadow-md shadow-pink-100">Chat with Anna</button>
+                    </div>
                 </div>
             </div>
-
-            <!-- App Card 3 - Hive Class Playlist Manager -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-                <!-- App Screenshot -->
-                <img src="https://placehold.co/600x400/f59e0b/white?text=Hive+Manager" alt="Hive App" class="w-full h-48 object-cover">
-                
-                <!-- Card Content -->
-                <div class="p-6 flex-grow">
-                    <h3 class="text-2xl font-semibold mb-2 text-yellow-700">Hive Class Playlist Manager</h3>
-                    <p class="text-gray-700 mb-4">
-                        Simplify your classroom media management. Create, organize, and share educational playlists to keep your students focused and engaged.
-                    </p>
-                </div>
-                
-                <!-- Card Footer with Link -->
-                <div class="p-6 bg-gray-50 border-t border-gray-200">
-                    <span class="inline-block bg-gray-400 text-white font-semibold py-2 px-5 rounded-lg w-full text-center cursor-not-allowed">
-                        Coming Soon
-                    </span>
-                </div>
-            </div>
-
-            <!-- App Card 4 - IEP Helper Suite (Interactive "Top Pills" Style) -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-               <!-- Header/Image area -->
-               <div class="h-40 bg-red-100 flex items-center justify-center">
-                  <img src="https://placehold.co/600x400/dc2626/white?text=IEP+Agents" alt="IEP Tools" class="h-full w-full object-cover opacity-90">
-               </div>
-               
-               <!-- Pill Nav -->
-               <div class="px-4 py-4 border-b border-gray-100">
-                  <div class="flex space-x-1 bg-gray-100 p-1 rounded-lg">
-                     <button onclick="switchPill('ines')" id="btn-ines" class="flex-1 py-2 text-xs font-bold rounded-md bg-white shadow text-red-600 transition-all">Ines</button>
-                     <button onclick="switchPill('ethan')" id="btn-ethan" class="flex-1 py-2 text-xs font-bold rounded-md text-gray-500 hover:text-gray-900 transition-all">Ethan</button>
-                     <button onclick="switchPill('priya')" id="btn-priya" class="flex-1 py-2 text-xs font-bold rounded-md text-gray-500 hover:text-gray-900 transition-all">Priya</button>
-                  </div>
-               </div>
-
-               <!-- Content -->
-               <div class="px-6 py-6 flex-grow flex flex-col">
-                  
-                  <!-- INES CONTENT -->
-                  <div id="pill-content-ines" class="pill-content block animate-fade-in flex-grow">
-                      <h3 class="text-xl font-bold text-gray-800 mb-2">Ines (PLAAFP)</h3>
-                      <p class="text-gray-600 text-sm mb-4">Responsible for writing the Present Levels of Performance and Student Needs Relating to Special Factors.</p>
-                      <ul class="text-xs text-gray-500 list-disc pl-4 mb-4 space-y-1">
-                          <li>Drafts Present Levels</li>
-                          <li>Identifies Special Factors</li>
-                      </ul>
-                      <div class="mt-auto pt-4">
-                        <a href="https://gemini.google.com/gem/1gQRifcThB64XMm7p7cslsOb8408iXpS1?usp=sharing" target="_blank" class="block w-full py-2 bg-red-600 text-white text-center rounded-lg font-bold hover:bg-red-700 transition-colors">Chat with Ines</a>
-                      </div>
-                  </div>
-
-                  <!-- ETHAN CONTENT -->
-                  <div id="pill-content-ethan" class="pill-content hidden animate-fade-in flex-grow">
-                      <h3 class="text-xl font-bold text-gray-800 mb-2">Ethan (Goals)</h3>
-                      <p class="text-gray-600 text-sm mb-4">Responsible for writing the Postsecondary Goals and Measurable Annual Goals based on data.</p>
-                      <div class="bg-gray-50 p-3 rounded mb-4 border border-gray-100">
-                          <p class="text-xs text-gray-500 italic">"I ensure goals are measurable and aligned to standards."</p>
-                      </div>
-                      <div class="mt-auto pt-4">
-                        <a href="https://gemini.google.com/gem/15KzitGz3DURE31pnmMTYJ5ZnZH1lDNnh?usp=sharing" target="_blank" class="block w-full py-2 bg-red-600 text-white text-center rounded-lg font-bold hover:bg-red-700 transition-colors">Chat with Ethan</a>
-                      </div>
-                  </div>
-
-                  <!-- PRIYA CONTENT -->
-                  <div id="pill-content-priya" class="pill-content hidden animate-fade-in flex-grow">
-                      <h3 class="text-xl font-bold text-gray-800 mb-2">Priya (Reviewer)</h3>
-                      <p class="text-gray-600 text-sm mb-4">Completes other sections, reviews the work of Ines and Ethan, and generates the completed IEP.</p>
-                      <p class="text-xs bg-yellow-50 text-yellow-800 p-2 rounded mb-4 border border-yellow-100">
-                          <strong>Role:</strong> Lead Compliance Reviewer
-                      </p>
-                      <div class="mt-auto pt-4">
-                        <a href="https://gemini.google.com/gem/1kmSX-ngMXdJcFqLV9nNFGXszNwgbIUIn?usp=sharing" target="_blank" class="block w-full py-2 bg-red-600 text-white text-center rounded-lg font-bold hover:bg-red-700 transition-colors">Chat with Priya</a>
-                      </div>
-                  </div>
-
-               </div>
-            </div>
-
-            <!-- App Card 5 - Anna (Data Specialist) -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-                <!-- App Screenshot -->
-                <img src="https://placehold.co/600x400/9333ea/white?text=Data+Agent" alt="Anna Agent" class="w-full h-48 object-cover">
-                
-                <!-- Card Content -->
-                <div class="p-6 flex-grow">
-                    <h3 class="text-2xl font-semibold mb-2 text-purple-700">Anna (Data Specialist)</h3>
-                    <p class="text-gray-700 mb-4">
-                        A school data specialist agent. Anna analyzes Regents, MAP Growth, and enrollment data to spot trends and recommend MTSS protocols.
-                    </p>
-                </div>
-
-                <!-- Card Footer with Link -->
-                <div class="p-6 bg-gray-50 border-t border-gray-200">
-                    <a href="https://gemini.google.com/gem/1Qb0yVrlYxkBEGM13ri9U53kPK0-s8J6u?usp=sharing" target="_blank" class="inline-block bg-purple-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300 hover:bg-purple-700 w-full text-center">
-                        Chat with Anna
-                    </a>
-                </div>
-            </div>
-            
-        </div>
-
-        <!-- NEW: Contact Form Section (Google Forms Integration) -->
-        <section class="mt-20 max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Get In Touch</h2>
-            
-            <script type="text/javascript">var submitted=false;</script>
-            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {alert('Thank you! Your message has been sent successfully.'); document.getElementById('contact-form').reset();}"></iframe>
-            
-            <!-- GOOGLE FORM INTEGRATED -->
-            <form id="contact-form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdENF-moIYuPAUFQEmamSHLwi3arZ1jp0PqPRPpgVX5-WxJOA/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;" class="space-y-6">
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text" id="name" name="entry.1808073583" required class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 bg-gray-50" placeholder="Your Name">
-                </div>
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" id="email" name="entry.838061836" required class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 bg-gray-50" placeholder="you@example.com">
-                </div>
-                <div>
-                    <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-                    <textarea id="message" name="entry.15001179" rows="4" required class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 bg-gray-50" placeholder="How can I help you?"></textarea>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-base font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform transform hover:-translate-y-1">
-                        Send Message
-                    </button>
-                </div>
-            </form>
         </section>
 
-    </main>
+        <!-- CATEGORY: AI IEP Agents -->
+        <section id="iep" class="mb-16 scroll-mt-24">
+            <h2 class="text-2xl font-bold mb-8 flex items-center gap-3 text-gray-800 border-b pb-4">
+                <i data-lucide="brain-circuit" class="text-red-600"></i>
+                AI IEP Agents
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- IEP Agents Card -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col card-lift border border-white">
+                    <img src="https://placehold.co/600x400/dc2626/white?text=IEP+Agents" alt="IEP Agents" class="w-full h-48 object-cover">
+                    
+                    <div class="p-6 flex-grow flex flex-col">
+                        <!-- Tabbed Navigation -->
+                        <div class="flex space-x-1 bg-gray-100 p-1 rounded-xl mb-6 w-full border border-gray-200">
+                            <button onclick="switchTab('iep', 'ines', 'bg-red-600')" id="btn-iep-ines" class="tab-btn-iep flex-1 py-1.5 text-[11px] font-bold rounded-lg bg-red-600 text-white hover:text-gray-900 transition-all shadow-sm">Ines</button>
+                            <button onclick="switchTab('iep', 'ethan', 'bg-red-600')" id="btn-iep-ethan" class="tab-btn-iep flex-1 py-1.5 text-[11px] font-bold rounded-lg text-gray-500 hover:text-gray-900 transition-all">Ethan</button>
+                            <button onclick="switchTab('iep', 'priya', 'bg-red-600')" id="btn-iep-priya" class="tab-btn-iep flex-1 py-1.5 text-[11px] font-bold rounded-lg text-gray-500 hover:text-gray-900 transition-all">Priya</button>
+                        </div>
 
-    <!-- Footer -->
-    <footer class="text-center py-8 mt-auto border-t border-gray-200 bg-white">
-        <p class="text-gray-600">&copy; 2025 Charles B. Herzek. All rights reserved.</p>
-        <p class="text-gray-500 mt-1">Made with GitHub Pages.</p>
-    </footer>
+                        <!-- DYNAMIC CONTENT -->
+                        <div class="flex-grow flex flex-col justify-between">
+                            <div id="content-iep-ines" class="tab-content-iep block animate-fade-in">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Ines (PLAAFP)</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed mb-6">Responsible for drafting Present Levels of Performance and Student Needs sections.</p>
+                                <button onclick="openPrivacyModal('Ines (PLAAFP)', 'https://gemini.google.com/gem/15Gf92d1izhAz6Cluoj4C6POGVR1cHuu3?usp=sharing')" class="w-full bg-red-600 text-white font-bold py-3 rounded-xl hover:bg-red-700 transition shadow-md shadow-red-100">Consult with Ines</button>
+                            </div>
+                            <div id="content-iep-ethan" class="tab-content-iep hidden animate-fade-in">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Ethan (Goals)</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed mb-6">Focuses on generating measurable annual goals and outcomes strictly aligned to standards.</p>
+                                <button onclick="openPrivacyModal('Ethan (Goals)', 'https://gemini.google.com/gem/16viOu5nD-LhkU2iZiZHzRaMGfkPyZpWN?usp=sharing')" class="w-full bg-red-600 text-white font-bold py-3 rounded-xl hover:bg-red-700 transition shadow-md shadow-red-100">Consult with Ethan</button>
+                            </div>
+                            <div id="content-iep-priya" class="tab-content-iep hidden animate-fade-in">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Priya (Reviewer)</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed mb-6">Lead compliance reviewer. Priya synthesizes inputs to generate final IEP documentation.</p>
+                                <button onclick="openPrivacyModal('Priya (Reviewer)', 'https://gemini.google.com/gem/1bPiPTXNT7lNCIxGnCNKXmg19PqOQzRu7?usp=sharing')" class="w-full bg-red-600 text-white font-bold py-3 rounded-xl hover:bg-red-700 transition shadow-md shadow-red-100">Consult with Priya</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- LIGHTBOX / MODAL STRUCTURE -->
-    <div id="app-modal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <!-- Background backdrop -->
-        <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity backdrop-blur-sm" onclick="closeModal()"></div>
+        <!-- CATEGORY: Communication and Engagement Tools -->
+        <section id="engagement" class="mb-16 scroll-mt-24">
+            <h2 class="text-2xl font-bold mb-8 flex items-center gap-3 text-gray-800 border-b pb-4">
+                <i data-lucide="message-square" class="text-amber-600"></i>
+                Communication and Engagement Tools
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Booky (Amber 600) -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col card-lift">
+                    <img src="https://placehold.co/600x400/d97706/white?text=Booky" alt="Booky Portal" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <div class="mb-4">
+                            <h3 class="text-2xl font-bold text-amber-700 mb-1">Booky</h3>
+                            <p class="text-amber-600 font-bold uppercase text-[10px] tracking-widest">Conference Specialist</p>
+                        </div>
+                        <p class="text-gray-700 mb-8 text-sm leading-relaxed">Streamlines parent-teacher conferences by creating a school-wide booking menu. Built on top of Google's integrated appointment scheduling platform.</p>
+                    </div>
+                    <div class="p-6 bg-gray-50 border-t border-gray-100">
+                        <a href="https://cherzek.github.io/booky-portal/" onclick="event.preventDefault(); openAppModal(this.href, 'Booky')" class="block w-full bg-amber-600 text-white font-bold py-3 px-5 rounded-xl text-center hover:bg-amber-700 transition shadow-md shadow-amber-100">Launch Booky</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <!-- Modal Panel -->
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="relative bg-white rounded-xl shadow-2xl w-full max-w-6xl h-[85vh] flex flex-col overflow-hidden">
-                
-                <!-- Modal Header -->
-                <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 bg-gray-50">
-                    <h3 class="text-xl font-bold text-gray-800" id="modal-title">App Preview</h3>
-                    <div class="flex items-center space-x-2">
-                        <a id="modal-external-link" href="#" target="_blank" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium mr-4">
-                            Open in New Tab &nearr;
-                        </a>
-                        <button type="button" onclick="closeModal()" class="text-gray-400 hover:text-gray-600 focus:outline-none transition-colors">
-                            <span class="sr-only">Close</span>
-                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
+        <!-- CATEGORY: Design Tools -->
+        <section id="design" class="mb-16 scroll-mt-24">
+            <h2 class="text-2xl font-bold mb-8 flex items-center gap-3 text-gray-800 border-b pb-4">
+                <i data-lucide="palette" class="text-blue-600"></i>
+                Design Tools
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Formalizer (Teal 600) -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col card-lift border border-white">
+                    <img src="https://placehold.co/600x400/0d9488/white?text=Formalizer" alt="Formalizer App" class="w-full h-48 object-cover">
+                    
+                    <div class="p-6 flex-grow flex flex-col">
+                        <!-- Tabbed Navigation -->
+                        <div class="flex space-x-1 bg-gray-100 p-1 rounded-xl mb-6 w-full border border-gray-200">
+                            <button onclick="switchTab('formalizer', 'fast', 'bg-teal-600')" id="btn-formalizer-fast" class="tab-btn-formalizer flex-1 py-1.5 text-[11px] font-bold rounded-lg bg-teal-600 text-white hover:text-gray-900 transition-all shadow-sm">Fast</button>
+                            <button onclick="switchTab('formalizer', 'manual', 'bg-teal-600')" id="btn-formalizer-manual" class="tab-btn-formalizer flex-1 py-1.5 text-[11px] font-bold rounded-lg text-gray-500 hover:text-gray-900 transition-all">Manual</button>
+                        </div>
+
+                        <!-- DYNAMIC CONTENT -->
+                        <div class="flex-grow flex flex-col justify-between">
+                            <div id="content-formalizer-fast" class="tab-content-formalizer block animate-fade-in">
+                                <h3 class="text-xl font-bold text-teal-700 mb-2">Formalizer Fast</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed mb-6">The automated web-app version. Rapidly generates standard form code for immediate deployment.</p>
+                                <button onclick="openPrivacyModal('Formalizer Fast', 'https://cherzek.github.io/formalizer/', true)" class="w-full bg-teal-600 text-white font-bold py-3 rounded-xl hover:bg-teal-700 transition shadow-md shadow-teal-100">Launch Fast Mode</button>
+                            </div>
+                            <div id="content-formalizer-manual" class="tab-content-formalizer hidden animate-fade-in">
+                                <h3 class="text-xl font-bold text-teal-700 mb-2">Formalizer Agent</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed mb-6">The Gemini AI version. Consult for complex form requirements and custom architectural logic.</p>
+                                <button onclick="openPrivacyModal('Formalizer Agent', 'https://gemini.google.com/gem/1sczVV5c1hlSARKCl5XJ8MZCOuFphZzQq?usp=sharing', false)" class="w-full bg-teal-600 text-white font-bold py-3 rounded-xl hover:bg-teal-700 transition shadow-md shadow-teal-100">Consult with Agent</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Modal Body (Iframe) -->
-                <div class="flex-grow bg-gray-100 relative">
-                    <iframe id="modal-iframe" src="" class="absolute inset-0 w-full h-full border-0" title="App Content"></iframe>
+                <!-- Desi (Blue 600) -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col card-lift">
+                    <img src="https://placehold.co/600x400/2563eb/white?text=Desi" alt="Desi Agent" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <div class="mb-4">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-1">Desi</h3>
+                            <p class="text-blue-600 font-bold uppercase text-[10px] tracking-widest">Graphics Specialist</p>
+                        </div>
+                        <p class="text-gray-700 mb-8 text-sm leading-relaxed">Assists in creating visually engaging, culturally responsive classroom posters and instructional graphics.</p>
+                    </div>
+                    <div class="p-6 bg-gray-50 border-t border-gray-100">
+                        <button onclick="openPrivacyModal('Desi', 'https://gemini.google.com/gem/1VKyxRkNoWlhySI4_publyXBQpVHbe3PH?usp=sharing')" class="block w-full bg-blue-600 text-white font-bold py-3 px-5 rounded-xl text-center hover:bg-blue-700 transition shadow-md shadow-blue-100">Consult with Desi</button>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- General Upcoming Placeholder -->
+        <section class="mt-16 flex justify-center">
+            <div class="max-w-md w-full border-2 border-dashed border-gray-300 rounded-3xl p-12 text-center text-gray-400 font-bold hover:border-indigo-300 hover:text-indigo-300 transition duration-300 bg-white/50">
+                <i data-lucide="plus-circle" class="w-10 h-10 mx-auto mb-3 opacity-50"></i>
+                <p class="uppercase tracking-widest text-sm">More Tools Coming Soon</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="mt-24 max-w-2xl mx-auto scroll-mt-24">
+            <div class="bg-white rounded-3xl shadow-2xl p-10 border border-white card-lift">
+                <h2 class="text-3xl font-black text-center text-gray-800 mb-2 tracking-tight">Get In Touch</h2>
+                <p class="text-gray-500 text-center mb-8 font-medium">Ready to collaborate on a school-wide digital solution?</p>
+                
+                <div id="success-message" class="hidden mb-6 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-center font-bold animate-fade-in">
+                    Success! Your message has been sent.
+                </div>
+
+                <form id="contact-form" class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1 ml-1">Name</label>
+                        <input type="text" required class="w-full px-4 py-3 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-indigo-50/50 focus:border-indigo-500 outline-none transition bg-gray-50/50" placeholder="Charles Herzek">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1 ml-1">Email</label>
+                        <input type="email" required class="w-full px-4 py-3 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-indigo-50/50 focus:border-indigo-500 outline-none transition bg-gray-50/50" placeholder="you@school.edu">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1 ml-1">Message</label>
+                        <textarea rows="4" required class="w-full px-4 py-3 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-indigo-50/50 focus:border-indigo-500 outline-none transition bg-gray-50/50" placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="button" onclick="showSuccess()" class="w-full py-4 bg-indigo-600 text-white font-black rounded-2xl hover:bg-indigo-700 transition-all transform hover:-translate-y-1 shadow-xl shadow-indigo-100">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-12 text-center mt-24">
+        <p class="text-gray-400 font-bold text-sm tracking-widest uppercase">© 2026 Charles B. Herzek. All rights reserved.</p>
+        <div class="flex justify-center space-x-6 mt-4 text-xs text-gray-400 font-semibold">
+            <span>Special Education (NY)</span>
+            <span>Computer Science (NY)</span>
+            <span>SBL & SDL Certified</span>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX: App Preview -->
+    <div id="app-modal" class="modal-overlay fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm opacity-0 invisible flex items-center justify-center p-4">
+        <div class="modal-content relative bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-[85vh] flex flex-col overflow-hidden">
+            <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100 bg-gray-50">
+                <h3 class="text-xl font-bold text-gray-800" id="modal-title">App Preview</h3>
+                <div class="flex items-center space-x-6">
+                    <a id="modal-external-link" href="#" target="_blank" class="text-sm font-bold text-indigo-600 hover:text-indigo-800">Open in New Tab &nearr;</a>
+                    <button onclick="closeAppModal()" class="text-gray-400 hover:text-gray-600 transition">
+                        <i data-lucide="x" class="w-7 h-7"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-grow bg-gray-50 relative">
+                <iframe id="modal-iframe" src="" class="absolute inset-0 w-full h-full border-0" title="App Content"></iframe>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT FOR MODAL & IEP CARD -->
-    <script>
-        // --- MODAL LOGIC ---
-        const modal = document.getElementById('app-modal');
-        const modalIframe = document.getElementById('modal-iframe');
-        const modalTitle = document.getElementById('modal-title');
-        const modalExternalLink = document.getElementById('modal-external-link');
+    <!-- MODAL: Privacy Acknowledgment -->
+    <div id="privacy-modal" class="modal-overlay fixed inset-0 z-[110] bg-black/70 backdrop-blur-md opacity-0 invisible flex items-center justify-center p-4">
+        <div class="modal-content bg-white w-full max-w-md rounded-3xl shadow-2xl p-8">
+            <div class="flex items-center gap-3 text-red-600 mb-6">
+                <i data-lucide="shield-alert" class="w-10 h-10"></i>
+                <h3 class="text-2xl font-black tracking-tight text-gray-900">Security Access</h3>
+            </div>
+            
+            <p class="text-gray-600 mb-6 leading-relaxed font-medium">
+                You are accessing <span id="privacy-gem-name" class="font-bold text-gray-900"></span>. This tool handles information subject to educational privacy laws.
+            </p>
 
-        function openModal(url, title) {
-            modalIframe.src = url;
-            modalTitle.textContent = title || 'App Preview';
-            modalExternalLink.href = url;
-            modal.classList.remove('hidden');
+            <div class="bg-red-50 p-6 rounded-2xl border border-red-100 mb-8">
+                <label class="flex items-start gap-4 cursor-pointer">
+                    <input type="checkbox" id="privacy-checkbox" class="mt-1 w-5 h-5 rounded-lg border-gray-300 text-indigo-600 focus:ring-indigo-500 transition" onchange="toggleLaunchButton()">
+                    <span class="text-sm text-red-900 font-bold leading-snug">
+                        I acknowledge I am using my school account and will follow appropriate district student PII data protocols.
+                    </span>
+                </label>
+            </div>
+
+            <div class="flex flex-col gap-3">
+                <button id="privacy-launch-btn" onclick="handlePrivacyConfirm()" class="w-full py-4 bg-indigo-600 text-white font-black rounded-2xl text-center opacity-40 pointer-events-none transition-all shadow-lg shadow-indigo-100">
+                    Confirm & Launch Tool
+                </button>
+                <button onclick="closePrivacyModal()" class="w-full py-2 text-sm text-gray-500 font-bold hover:text-gray-700">
+                    Cancel and Return
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        let targetUrl = '';
+        let targetName = '';
+        let isLightbox = false;
+
+        function showSuccess() {
+            document.getElementById('success-message').classList.remove('hidden');
+            document.getElementById('contact-form').reset();
+            setTimeout(() => { document.getElementById('success-message').classList.add('hidden'); }, 5000);
+        }
+
+        function openAppModal(url, title) {
+            document.getElementById('modal-iframe').src = url;
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-external-link').href = url;
+            document.getElementById('app-modal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-        function closeModal() {
-            modal.classList.add('hidden');
-            modalIframe.src = '';
+        function closeAppModal() {
+            document.getElementById('app-modal').classList.remove('active');
+            document.getElementById('modal-iframe').src = '';
             document.body.style.overflow = 'auto';
         }
 
-        document.addEventListener('keydown', function(event) {
-            if (event.key === "Escape") {
-                closeModal();
+        function openPrivacyModal(name, url, isApp = false) {
+            targetUrl = url;
+            targetName = name;
+            isLightbox = isApp;
+            
+            document.getElementById('privacy-gem-name').textContent = name;
+            document.getElementById('privacy-checkbox').checked = false;
+            toggleLaunchButton();
+            
+            document.getElementById('privacy-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePrivacyModal() {
+            document.getElementById('privacy-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function toggleLaunchButton() {
+            const checkbox = document.getElementById('privacy-checkbox');
+            const btn = document.getElementById('privacy-launch-btn');
+            if (checkbox.checked) {
+                btn.classList.remove('opacity-40', 'pointer-events-none');
+            } else {
+                btn.classList.add('opacity-40', 'pointer-events-none');
+            }
+        }
+
+        function handlePrivacyConfirm() {
+            if (isLightbox) {
+                closePrivacyModal();
+                openAppModal(targetUrl, targetName);
+            } else {
+                window.open(targetUrl, '_blank');
+                closePrivacyModal();
+            }
+        }
+
+        /**
+         * Generic Tab Switching Logic
+         * @param {string} groupId - Unique ID for the card (e.g., 'iep', 'formalizer')
+         * @param {string} tabId - Unique ID for the tab (e.g., 'ines', 'fast')
+         * @param {string} activeColorClass - Tailwind bg class for active state (e.g., 'bg-red-600')
+         */
+        function switchTab(groupId, tabId, activeColorClass) {
+            // Hide all content in this group
+            document.querySelectorAll('.tab-content-' + groupId).forEach(el => el.classList.add('hidden'));
+            // Show target content
+            document.getElementById('content-' + groupId + '-' + tabId).classList.remove('hidden');
+            
+            // Reset all buttons in this group
+            document.querySelectorAll('.tab-btn-' + groupId).forEach(btn => {
+                btn.classList.remove(activeColorClass, 'text-white', 'shadow-sm');
+                btn.classList.add('text-gray-500');
+            });
+
+            // Set active button
+            const activeBtn = document.getElementById('btn-' + groupId + '-' + tabId);
+            activeBtn.classList.remove('text-gray-500');
+            activeBtn.classList.add(activeColorClass, 'text-white', 'shadow-sm');
+        }
+
+        window.onclick = function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeAppModal();
+                closePrivacyModal();
+            }
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") {
+                closeAppModal();
+                closePrivacyModal();
             }
         });
-
-        // --- IEP CARD PILL SWITCHER LOGIC ---
-        function switchPill(pillName) {
-            // Content Toggle
-            document.querySelectorAll('.pill-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById('pill-content-' + pillName).classList.remove('hidden');
-            
-            // Button Style Toggle
-            const buttons = ['ines', 'ethan', 'priya'];
-            buttons.forEach(name => {
-                const btn = document.getElementById('btn-' + name);
-                if(name === pillName) {
-                    // Active State
-                    btn.classList.remove('text-gray-500', 'hover:text-gray-900');
-                    btn.classList.add('bg-white', 'shadow', 'text-red-600');
-                } else {
-                    // Inactive State
-                    btn.classList.add('text-gray-500', 'hover:text-gray-900');
-                    btn.classList.remove('bg-white', 'shadow', 'text-red-600');
-                }
-            });
-        }
     </script>
-
 </body>
 </html>
